@@ -66,3 +66,45 @@ class _HeaderDiagonalPainter extends CustomPainter {
     return true;
   }
 }
+
+class HeaderTriangular extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      //color: Color(0xff615aab),
+      child: CustomPaint(
+        painter: _HeaderTriangularPainter(),
+      ),
+    );
+  }
+}
+
+class _HeaderTriangularPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final lapiz = new Paint();
+
+    //propiedades
+    lapiz.color = Color(0xff615aab);
+    lapiz.style = PaintingStyle.fill; //.stroke
+    lapiz.strokeWidth = 2;
+
+    final path = new Path();
+
+    //Pinta la parte superior
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    //Pinta la parte inferior
+    /* path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height); */
+
+    canvas.drawPath(path, lapiz);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
