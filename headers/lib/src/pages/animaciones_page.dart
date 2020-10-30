@@ -39,7 +39,15 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
 
   @override
   Widget build(BuildContext context) {
-    return _Rectangulo();
+    //play animacion
+    controller.forward();
+    return AnimatedBuilder(
+        animation: controller,
+        //child: _Rectangulo(),
+        builder: (BuildContext context, Widget child) {
+          print('Rotacion' + rotacion.value.toString());
+          return Transform.rotate(angle: rotacion.value, child: _Rectangulo());
+        });
   }
 }
 
