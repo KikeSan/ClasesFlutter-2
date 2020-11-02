@@ -85,21 +85,12 @@ class _HeaderTriangularPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final lapiz = new Paint();
-
-    //propiedades
     lapiz.color = Color(0xff615aab);
-    lapiz.style = PaintingStyle.fill; //.stroke
+    lapiz.style = PaintingStyle.fill;
     lapiz.strokeWidth = 2;
-
     final path = new Path();
-
-    //Pinta la parte superior
     path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0);
-    //Pinta la parte inferior
-    /* path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height); */
-
     canvas.drawPath(path, lapiz);
   }
 
@@ -171,19 +162,14 @@ class _HeaderCurvoPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final lapiz = new Paint();
-
-    //propiedades
     lapiz.color = Color(0xff615aab);
-    lapiz.style = PaintingStyle.fill; //.stroke
+    lapiz.style = PaintingStyle.fill;
     lapiz.strokeWidth = 2;
-
     final path = new Path();
-
     path.lineTo(0, size.height * 0.3);
     path.quadraticBezierTo(
         size.width * 0.5, size.height * 0.5, size.width, size.height * 0.3);
     path.lineTo(size.width, 0);
-
     canvas.drawPath(path, lapiz);
   }
 
@@ -211,21 +197,15 @@ class _HeaderWavePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final lapiz = new Paint();
-
-    //propiedades
     lapiz.color = Color(0xff615aab);
-    lapiz.style = PaintingStyle.fill; //.stroke
-    lapiz.strokeWidth = 2;
-
+    lapiz.style = PaintingStyle.fill;
     final path = new Path();
-
     path.lineTo(0, size.height * 0.3);
     path.quadraticBezierTo(size.width * 0.25, size.height * 0.35,
         size.width * 0.5, size.height * 0.3);
     path.quadraticBezierTo(
         size.width * 0.75, size.height * 0.25, size.width, size.height * 0.3);
     path.lineTo(size.width, 0);
-
     canvas.drawPath(path, lapiz);
   }
 
