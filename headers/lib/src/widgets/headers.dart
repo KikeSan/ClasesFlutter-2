@@ -117,7 +117,22 @@ class HeaderPico extends StatelessWidget {
 class _HeaderPicoPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final lapiz = new Paint();
+    final Rect rect =
+        new Rect.fromCircle(center: Offset(0.0, 185.0), radius: 150);
+    final Gradient gradiente = new LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: <Color>[
+          Color(0xffff2653),
+          Color(0xffd21f44),
+          Color(0xffa31634)
+        ],
+        stops: [
+          0.0,
+          0.5,
+          1.0
+        ]);
+    final lapiz = new Paint()..shader = gradiente.createShader(rect);
 
     //propiedades
     lapiz.color = Color(0xff615aab);
@@ -128,7 +143,7 @@ class _HeaderPicoPainter extends CustomPainter {
 
     //Pinta la parte superior
     path.lineTo(0, size.height * 0.3);
-    path.lineTo(size.width * 0.5, size.height * 0.4);
+    path.lineTo(size.width * 0.5, size.height * 0.35);
     path.lineTo(size.width, size.height * 0.3);
     path.lineTo(size.width, 0);
     //Pinta la parte inferior
