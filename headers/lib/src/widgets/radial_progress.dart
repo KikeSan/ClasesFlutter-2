@@ -4,9 +4,18 @@ import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
   final porcentaje;
+  final Color colorPrimario;
+  final Color colorSecundario;
+  final double grosorSecundario;
+  final double grosorPrimario;
 
-
-  RadialProgress({ this.porcentaje });
+  RadialProgress({
+    @required this.porcentaje,
+    this.colorPrimario = Colors.blue,
+    this.colorSecundario = Colors.black12,
+    this.grosorSecundario = 4,
+    this.grosorPrimario = 4
+  });
 
   @override
   _RadialProgressState createState() => _RadialProgressState();
@@ -19,7 +28,7 @@ class _RadialProgressState extends State<RadialProgress> with SingleTickerProvid
 
   @override
   void initState() {
-    porcentajeAnterior=widget.porcentaje;
+    porcentajeAnterior = widget.porcentaje;
     controller = new AnimationController(vsync: this, duration: Duration(milliseconds: 20));
 
     super.initState();
@@ -44,7 +53,13 @@ class _RadialProgressState extends State<RadialProgress> with SingleTickerProvid
             width: double.infinity,
             height: double.infinity,
             child: CustomPaint(
-              painter: _MiRadialProgress( (widget.porcentaje - diferenciaAnimar) + (diferenciaAnimar * controller.value) ),
+              painter: _MiRadialProgress(
+                  (widget.porcentaje - diferenciaAnimar) + (diferenciaAnimar * controller.value),
+                widget.colorPrimario,
+                widget.colorSecundario,
+                widget.grosorSecundario,
+                widget.grosorPrimario
+              ),
             ),
           );
         }
@@ -55,8 +70,18 @@ class _RadialProgressState extends State<RadialProgress> with SingleTickerProvid
 
 class _MiRadialProgress extends CustomPainter{
   final porcentaje;
+  final Color colorPrimario;
+  final Color colorSecundario;
+  final double grosorSecundario;
+  final double grosorPrimario;
 
-  _MiRadialProgress(this.porcentaje);
+  _MiRadialProgress(
+      this.porcentaje,
+      this.colorPrimario,
+      this.colorSecundario,
+      this.grosorSecundario,
+      this.grosorPrimario
+      );
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -64,8 +89,8 @@ class _MiRadialProgress extends CustomPainter{
 
 
     final paint = new Paint()
-      ..strokeWidth = 4
-      ..color = Colors.black12
+      ..strokeWidth = grosorSecundario
+      ..color = colorSecundario
       ..style = PaintingStyle.stroke;
 
     final center = new Offset(size.width*0.5, size.height/2);
@@ -75,8 +100,8 @@ class _MiRadialProgress extends CustomPainter{
 
     //arco
     final paintArco = new Paint()
-      ..strokeWidth = 10
-      ..color = Colors.redAccent[700]
+      ..strokeWidth = grosorPrimario
+      ..color = colorPrimario
       ..style = PaintingStyle.stroke;
 
     //parte q se va llenando
