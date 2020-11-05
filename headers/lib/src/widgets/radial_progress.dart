@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
@@ -14,8 +16,56 @@ class _RadialProgressState extends State<RadialProgress> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('${widget.porcentaje}'),
+      padding: EdgeInsets.all(10),
+      width: double.infinity,
+      height: double.infinity,
+      child: CustomPaint(
+        painter: _MiRadialProgress(widget.porcentaje),
+      ),
     );
   }
+}
+
+
+class _MiRadialProgress extends CustomPainter{
+  final porcentaje;
+
+  _MiRadialProgress(this.porcentaje);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+
+
+
+    final paint = new Paint()
+      ..strokeWidth = 4
+      ..color = Colors.black12
+      ..style = PaintingStyle.stroke;
+
+    final center = new Offset(size.width*0.5, size.height/2);
+    final radio = min(size.width*0.5, size.height*0.5);
+
+    canvas.drawCircle(center, radio, paint);
+
+    //arco
+    final paintArco = new Paint()
+      ..strokeWidth = 10
+      ..color = Colors.redAccent[700]
+      ..style = PaintingStyle.stroke;
+
+    //parte q se va llenando
+    double arcAngle = 2*pi*(porcentaje/100);
+    canvas.drawArc(
+        Rect.fromCircle(center: center,radius: radio),
+        -pi/2,
+        arcAngle,
+        false,
+        paintArco);
+
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+
 }
 
