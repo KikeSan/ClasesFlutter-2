@@ -29,7 +29,7 @@ class _RadialProgressState extends State<RadialProgress> with SingleTickerProvid
   @override
   void initState() {
     porcentajeAnterior = widget.porcentaje;
-    controller = new AnimationController(vsync: this, duration: Duration(milliseconds: 20));
+    controller = new AnimationController(vsync: this, duration: Duration(milliseconds: 200));
 
     super.initState();
   }
@@ -91,6 +91,7 @@ class _MiRadialProgress extends CustomPainter{
     final paint = new Paint()
       ..strokeWidth = grosorSecundario
       ..color = colorSecundario
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     final center = new Offset(size.width*0.5, size.height/2);

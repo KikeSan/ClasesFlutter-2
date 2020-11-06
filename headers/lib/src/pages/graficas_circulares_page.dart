@@ -30,7 +30,6 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
               CustomRadialProgress(porcentaje: porcentaje, color: Colors.red )
             ],
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -41,8 +40,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
 
         ]
     ));
-  }
-}
+  }}
 
 class CustomRadialProgress extends StatelessWidget {
   final Color color;
