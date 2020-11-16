@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:headers/src/widgets/pinterest_menu.dart';
+import 'package:provider/provider.dart';
 
 class PinterestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      //body: PinterestGrid(),
-      //body: PinterestMenu(),
-      body: Stack(
-        children: <Widget>[
-          PinterestGrid(),
-          _PinterestMenuLocation()
-        ],
+    return ChangeNotifierProvider(
+      create: (_)=> new _MenuModel(),
+      child: Scaffold(
+        backgroundColor: Colors.grey[200],
+        //body: PinterestGrid(),
+        //body: PinterestMenu(),
+        body: Stack(
+          children: <Widget>[
+            PinterestGrid(),
+            _PinterestMenuLocation()
+          ],
+        ),
       ),
     );
   }
@@ -25,12 +29,15 @@ class _PinterestMenuLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final widthPantalla = MediaQuery.of(context).size.width;
+    final mostrar = Provider.of<_MenuModel>(context).mostrar;
     return Positioned(
         bottom: 30,
         child: Container(
           width: widthPantalla,
           child: Align(
-            child: PinterestMenu(),
+            child: PinterestMenu(
+              mostrar: mostrar,
+            ),
           ),
         )
     );
@@ -54,8 +61,10 @@ class _PinterestGridState extends State<PinterestGrid> {
       //print('Scrolllistener ${controller.offset}');
       if(controller.offset >scrollAnterior){
         print('Ocultar Menu');
+        Provider.of<_MenuModel>(context, listen: false).mostrar = false;
       }else{
         print('Mostrar Menu');
+        Provider.of<_MenuModel>(context, listen: false).mostrar = true;
       }
 
       scrollAnterior = controller.offset;
@@ -103,5 +112,16 @@ class _PinterestItem extends StatelessWidget {
           child: new Text('$index'),
         ),
       ));
+  }
+}
+
+class _MenuModel with ChangeNotifier{
+  bool _mostrar = true;
+
+  bool get mostrar => this._mostrar;
+
+  set mostrar(bool value) {
+    this._mostrar = value;
+    notifyListeners();
   }
 }
