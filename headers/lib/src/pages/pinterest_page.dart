@@ -9,16 +9,67 @@ class PinterestPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       //body: PinterestGrid(),
-      body: PinterestMenu(),
+      //body: PinterestMenu(),
+      body: Stack(
+        children: <Widget>[
+          PinterestGrid(),
+          _PinterestMenuLocation()
+        ],
+      ),
     );
   }
 }
 
-class PinterestGrid extends StatelessWidget {
+class _PinterestMenuLocation extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    final widthPantalla = MediaQuery.of(context).size.width;
+    return Positioned(
+        bottom: 30,
+        child: Container(
+          width: widthPantalla,
+          child: Align(
+            child: PinterestMenu(),
+          ),
+        )
+    );
+  }
+}
+
+class PinterestGrid extends StatefulWidget {
+  @override
+  _PinterestGridState createState() => _PinterestGridState();
+}
+
+class _PinterestGridState extends State<PinterestGrid> {
+
   final List<int> items = List.generate(200, (index) => index);
+  ScrollController controller = new ScrollController();
+  double scrollAnterior = 0;
+
+  @override
+  void initState() {
+    controller.addListener(() {
+      //print('Scrolllistener ${controller.offset}');
+      if(controller.offset >scrollAnterior){
+        print('Ocultar Menu');
+      }else{
+        print('Mostrar Menu');
+      }
+
+      scrollAnterior = controller.offset;
+    });
+  }
+  @override
+  void dispose() {
+    controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new StaggeredGridView.countBuilder(
+      controller: controller,
       crossAxisCount: 4,
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) =>
@@ -29,6 +80,8 @@ class PinterestGrid extends StatelessWidget {
       crossAxisSpacing: 4.0,
     );
   }
+
+  
 }
 
 class _PinterestItem extends StatelessWidget {
