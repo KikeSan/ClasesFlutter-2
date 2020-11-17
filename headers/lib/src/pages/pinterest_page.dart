@@ -25,7 +25,6 @@ class PinterestPage extends StatelessWidget {
 }
 
 class _PinterestMenuLocation extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final widthPantalla = MediaQuery.of(context).size.width;
@@ -37,6 +36,14 @@ class _PinterestMenuLocation extends StatelessWidget {
           child: Align(
             child: PinterestMenu(
               mostrar: mostrar,
+              activeColor: Colors.red[800],
+              inactiveColor: Colors.grey,
+              items: [
+                PinterestButton(icon: Icons.pie_chart, onPressed: (){print('Icon pie chart');}),
+                PinterestButton(icon: Icons.search, onPressed: (){print('Icon search');}),
+                PinterestButton(icon: Icons.notifications, onPressed: (){print('Icon notifications');}),
+                PinterestButton(icon: Icons.supervised_user_circle, onPressed: (){print('Icon supervised_user_circle');})
+              ],
             ),
           ),
         )
@@ -59,7 +66,7 @@ class _PinterestGridState extends State<PinterestGrid> {
   void initState() {
     controller.addListener(() {
       //print('Scrolllistener ${controller.offset}');
-      if(controller.offset >scrollAnterior){
+      if(controller.offset >scrollAnterior && controller.offset > 150){
         print('Ocultar Menu');
         Provider.of<_MenuModel>(context, listen: false).mostrar = false;
       }else{
