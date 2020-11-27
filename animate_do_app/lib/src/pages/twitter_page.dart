@@ -28,7 +28,9 @@ class _TwitterPageState extends State<TwitterPage> {
           from: 30,
           duration: Duration(seconds: 1),
           child: FaIcon(FontAwesomeIcons.twitter,
-            color: Colors.white,size: 40,)
+            color: Colors.white,
+            size: 40
+          )
         ),
       ),
     );
