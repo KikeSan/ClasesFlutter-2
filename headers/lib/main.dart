@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:headers/src/pages/emergency_page.dart';
+import 'package:headers/src/pages/launcher_page.dart';
 import 'package:headers/src/pages/pinterest_page.dart';
 import 'package:headers/src/pages/slideshow_page.dart';
 import 'package:headers/src/pages/sliver_list_page.dart';
@@ -19,6 +20,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Diseños App',
-        home: SliverListPage());
+        home: LauncherPage());
   }
 }
