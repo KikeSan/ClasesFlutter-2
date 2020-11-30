@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:headers/src/theme/theme.dart';
 import 'package:headers/src/widgets/slideshow.dart';
+import 'package:provider/provider.dart';
 
 class SlideshowPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final primaryColor = appTheme.currentTheme.primaryColor;
     return Scaffold(
-      backgroundColor: Colors.purple[50],
+      backgroundColor: (appTheme.darkTheme)? primaryColor:Colors.purple[50],
       body: Column(
         children: <Widget>[
           Expanded(child: MiSlideshow()),
@@ -18,17 +22,17 @@ class SlideshowPage extends StatelessWidget{
 }
 
 class MiSlideshow extends StatelessWidget {
-  const MiSlideshow({
-    Key key,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final accentColor = appTheme.currentTheme.accentColor;
+
     return Slideshow(
       bulletPrimario: 20,
       bulletSecundario: 12,
       //puntosArriba: true,
-      colorPrimario: Colors.purple,
+      colorPrimario: (appTheme.darkTheme) ? accentColor:Colors.purple,
       colorSecundario: Colors.purple[200],
       slides: <Widget>[
         SvgPicture.asset('assets/svgs/slide-1.svg'),
