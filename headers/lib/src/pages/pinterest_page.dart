@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:headers/src/theme/theme.dart';
 import 'package:headers/src/widgets/pinterest_menu.dart';
 import 'package:provider/provider.dart';
 
@@ -7,10 +8,11 @@ class PinterestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
     return ChangeNotifierProvider(
       create: (_)=> new _MenuModel(),
       child: Scaffold(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: (appTheme.darkTheme)?appTheme.currentTheme.scaffoldBackgroundColor:Colors.grey[200],
         //body: PinterestGrid(),
         //body: PinterestMenu(),
         body: Stack(
@@ -29,6 +31,8 @@ class _PinterestMenuLocation extends StatelessWidget {
   Widget build(BuildContext context) {
     final widthPantalla = MediaQuery.of(context).size.width;
     final mostrar = Provider.of<_MenuModel>(context).mostrar;
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Positioned(
         bottom: 30,
         child: Container(
@@ -36,8 +40,9 @@ class _PinterestMenuLocation extends StatelessWidget {
           child: Align(
             child: PinterestMenu(
               mostrar: mostrar,
-              activeColor: Colors.red[800],
+              activeColor: (appTheme.darkTheme)? appTheme.currentTheme.accentColor:Colors.red[800],
               inactiveColor: Colors.grey,
+              backgroundColor: appTheme.currentTheme.scaffoldBackgroundColor,
               items: [
                 PinterestButton(icon: Icons.pie_chart, onPressed: (){print('Icon pie chart');}),
                 PinterestButton(icon: Icons.search, onPressed: (){print('Icon search');}),
