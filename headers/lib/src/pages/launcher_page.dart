@@ -49,6 +49,7 @@ class _MenuPrincipal extends StatelessWidget {
     final accentColor = appTheme.currentTheme.accentColor;
     return Drawer(
       child: Container(
+        color: appTheme.currentTheme.scaffoldBackgroundColor,
         child: Column(
           children: [
             SafeArea(
