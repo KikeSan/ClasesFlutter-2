@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:headers/src/pages/emergency_page.dart';
 import 'package:headers/src/pages/launcher_page.dart';
+import 'package:headers/src/pages/launcher_tablet_page.dart';
 import 'package:headers/src/pages/pinterest_page.dart';
 import 'package:headers/src/pages/slideshow_page.dart';
 import 'package:headers/src/pages/sliver_list_page.dart';
@@ -21,6 +22,22 @@ class MyApp extends StatelessWidget {
       theme: currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Diseños App',
-      home: LauncherPage());
+      home: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation){
+          final screenSize = MediaQuery.of(context).size;
+
+          if(screenSize.width > 500){
+            return LauncherTabletPage();
+          }else{
+            return LauncherPage();
+          }
+
+          /*print('Orientacion $orientation');
+          return Container(
+            child: LauncherPage()
+          );*/
+        },
+      )
+    );
   }
 }
