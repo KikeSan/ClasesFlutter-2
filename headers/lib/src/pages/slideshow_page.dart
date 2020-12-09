@@ -9,14 +9,19 @@ class SlideshowPage extends StatelessWidget{
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context);
     final primaryColor = appTheme.currentTheme.primaryColor;
+
+    bool isLarge = (MediaQuery.of(context).size.height>500)?true:false;
+
+    final children = [
+      Expanded(child: MiSlideshow()),
+      Expanded(child: MiSlideshow())
+    ];
+
     return Scaffold(
-      backgroundColor: (appTheme.darkTheme)? primaryColor:Colors.purple[50],
-      body: Column(
-        children: <Widget>[
-          Expanded(child: MiSlideshow()),
-          Expanded(child: MiSlideshow())
-        ],
-      )
+      backgroundColor:(appTheme.darkTheme)?primaryColor:Colors.purple[50],
+      body: (isLarge)
+          ?Column(children: children)
+          :Row(children: children)
     );
   }
 }
