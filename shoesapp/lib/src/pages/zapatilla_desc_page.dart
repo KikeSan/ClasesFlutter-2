@@ -18,11 +18,57 @@ class ZapatillaDescPage extends StatelessWidget {
                     descripcion: "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so."
                 ),
                 _MontoByNow(),
+                _ColoresYMas()
               ],
             ),
           ))
         ],
       )
+    );
+  }
+}
+
+class _ColoresYMas extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15),
+      child: Row(
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                Positioned(left:90,child:_BotonColor(Color(0xffc6d642))),
+                Positioned(left:60,child:_BotonColor(Color(0xffffad29))),
+                Positioned(left:30,child:_BotonColor(Color(0xff2099f1))),
+                _BotonColor(Color(0xff364d56)),
+              ],
+            )),
+          //Spacer(),
+          BotonNaranja(texto: 'More related items', alto: 30,ancho: 170,color: Color(0xffffc675),)
+        ],
+      ),
+    );
+  }
+}
+
+class _BotonColor extends StatelessWidget {
+  final Color color;
+
+  _BotonColor(
+    this.color,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 45,
+      height: 45,
+      decoration: BoxDecoration(
+        color: this.color,
+        shape: BoxShape.circle
+      ),
     );
   }
 }
