@@ -55,8 +55,8 @@ class _BotonesLikeCartSettings extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _BotonSombreado(Icon(Icons.favorite, color: Colors.red,size: 25)),
-          _BotonSombreado(Icon(Icons.add_shopping_cart, color: Colors.grey.withOpacity(0.4),size: 25)),
-          _BotonSombreado(Icon(Icons.settings, color: Colors.grey.withOpacity(0.4),size: 25))
+          _BotonSombreado(Icon(Icons.add_shopping_cart, color: Colors.grey[600].withOpacity(0.4),size: 25)),
+          _BotonSombreado(Icon(Icons.settings, color: Colors.grey[600].withOpacity(0.4),size: 25))
         ],
       ),
     );
