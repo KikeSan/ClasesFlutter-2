@@ -1,21 +1,34 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ZapatillaSizePreview extends StatelessWidget {
+  final bool fullscreen;
+
+  ZapatillaSizePreview({
+    this.fullscreen = false
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+      padding: EdgeInsets.symmetric(
+          horizontal: this.fullscreen?5: 30,
+          vertical: this.fullscreen?5: 0
+      ),
       child: Container(
         width: double.infinity,
-        height: 410,
+        height: this.fullscreen ?384:430,
         decoration: BoxDecoration(
           color: Color(0xffffcf53),
-          borderRadius: BorderRadius.circular(40)
+          borderRadius: !fullscreen
+              ? BorderRadius.circular(40)
+              : BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight: Radius.circular(50),topLeft: Radius.circular(30),topRight: Radius.circular(30))
         ),
         child: Column(
           children: [
             _ZapatillaConSombra(),
-            _ZapatillaTallas()
+            if(!this.fullscreen)
+              _ZapatillaTallas()
           ],
         ),
       ),
