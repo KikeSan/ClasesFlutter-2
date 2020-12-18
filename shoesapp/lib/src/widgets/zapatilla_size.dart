@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shoesapp/src/pages/zapatilla_desc_page.dart';
 
 class ZapatillaSizePreview extends StatelessWidget {
   final bool fullscreen;
@@ -10,26 +11,33 @@ class ZapatillaSizePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: this.fullscreen?5: 30,
-          vertical: this.fullscreen?5: 0
-      ),
-      child: Container(
-        width: double.infinity,
-        height: this.fullscreen ?384:430,
-        decoration: BoxDecoration(
-          color: Color(0xffffcf53),
-          borderRadius: !fullscreen
-              ? BorderRadius.circular(40)
-              : BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight: Radius.circular(50),topLeft: Radius.circular(30),topRight: Radius.circular(30))
+    return GestureDetector(
+      onTap: (){
+        if(!this.fullscreen){
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>ZapatillaDescPage()));
+        }
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: this.fullscreen?5: 30,
+            vertical: this.fullscreen?5: 0
         ),
-        child: Column(
-          children: [
-            _ZapatillaConSombra(),
-            if(!this.fullscreen)
-              _ZapatillaTallas()
-          ],
+        child: Container(
+          width: double.infinity,
+          height: this.fullscreen ?384:430,
+          decoration: BoxDecoration(
+            color: Color(0xffffcf53),
+            borderRadius: !fullscreen
+                ? BorderRadius.circular(40)
+                : BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight: Radius.circular(50),topLeft: Radius.circular(30),topRight: Radius.circular(30))
+          ),
+          child: Column(
+            children: [
+              _ZapatillaConSombra(),
+              if(!this.fullscreen)
+                _ZapatillaTallas()
+            ],
+          ),
         ),
       ),
     );

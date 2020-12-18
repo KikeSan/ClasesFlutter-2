@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:shoesapp/src/widgets/custom_widgets.dart';
 
@@ -10,7 +11,10 @@ class ZapatillaDescPage extends StatelessWidget {
         children: [
           Stack(
               children: [
-                ZapatillaSizePreview(fullscreen:true),
+                Hero(
+                    tag: 'zapatilla-1',
+                    child: ZapatillaSizePreview(fullscreen:true)
+                ),
                 Positioned(
                   top: 40,
                   child: FloatingActionButton(
@@ -18,7 +22,9 @@ class ZapatillaDescPage extends StatelessWidget {
                     elevation: 0,
                     highlightElevation: 0,
                     backgroundColor: Colors.transparent,
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
                   )
                 )
               ]
@@ -95,10 +101,10 @@ class _ColoresYMas extends StatelessWidget {
           Expanded(
             child: Stack(
               children: [
-                Positioned(left:90,child:_BotonColor(Color(0xffc6d642))),
-                Positioned(left:60,child:_BotonColor(Color(0xffffad29))),
-                Positioned(left:30,child:_BotonColor(Color(0xff2099f1))),
-                _BotonColor(Color(0xff364d56)),
+                Positioned(left:90,child:_BotonColor(Color(0xffc6d642),3)),
+                Positioned(left:60,child:_BotonColor(Color(0xffffad29),2)),
+                Positioned(left:30,child:_BotonColor(Color(0xff2099f1),1)),
+                _BotonColor(Color(0xff364d56),0),
               ],
             )),
           //Spacer(),
@@ -111,19 +117,25 @@ class _ColoresYMas extends StatelessWidget {
 
 class _BotonColor extends StatelessWidget {
   final Color color;
+  final int index;
 
   _BotonColor(
     this.color,
+    this.index
   );
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 45,
-      height: 45,
-      decoration: BoxDecoration(
-        color: this.color,
-        shape: BoxShape.circle
+    return ElasticInLeft(
+      delay: Duration(milliseconds: this.index*100),
+      duration: Duration(milliseconds: 1300),
+      child: Container(
+        width: 45,
+        height: 45,
+        decoration: BoxDecoration(
+          color: this.color,
+          shape: BoxShape.circle
+        ),
       ),
     );
   }
@@ -141,7 +153,11 @@ class _MontoByNow extends StatelessWidget {
           children: [
             Text('\$180.0',style:TextStyle(fontSize: 28,fontWeight: FontWeight.bold)),
             Spacer(),
-            BotonNaranja(texto: 'Buy Now',ancho: 120,alto: 40,)
+            Bounce(
+              delay: Duration(seconds: 1),
+              from: 8,
+              child: BotonNaranja(texto: 'Buy Now',ancho: 120,alto: 40,)
+            )
           ],
         ),
       ),
