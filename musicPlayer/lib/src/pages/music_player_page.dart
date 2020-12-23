@@ -7,15 +7,40 @@ class MusicPlayerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          CustomAppBar(),
-          ImagenDiscoDuracion(),
-          TituloPlay(),
-          Expanded(
-              child: Lyrics()
-          )
+          Background(),
+          Column(
+            children: [
+              CustomAppBar(),
+              ImagenDiscoDuracion(),
+              TituloPlay(),
+              Expanded(
+                  child: Lyrics()
+              )
+            ],
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class Background extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    return Container(
+      width: double.infinity,
+      height: screenSize.height*0.7,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(60)),
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft, end: Alignment.center,
+          colors: [
+            Color(0xff33333e), Color(0xff201e28)
+          ]
+        )
       ),
     );
   }
