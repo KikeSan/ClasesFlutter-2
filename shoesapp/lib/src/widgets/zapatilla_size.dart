@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoesapp/src/models/zapatilla_model.dart';
 import 'package:shoesapp/src/pages/zapatilla_desc_page.dart';
 
 class ZapatillaSizePreview extends StatelessWidget {
@@ -71,21 +73,30 @@ class _TallaZapatillaCaja extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Text('${numero.toString().replaceAll('.0', '')}',
-        style: TextStyle(
-          color: (this.numero==9)? Colors.white:Color(0xfff1a23a),
-          fontSize: 16,
-          fontWeight: FontWeight.bold,)),
-      width: 45, height: 45,
-      decoration: BoxDecoration(
-        color: (this.numero==9)?Color(0xfff1a23a):Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          if(this.numero==9)
-          BoxShadow(color: Color(0xfff1a23a),blurRadius: 10, offset: Offset(0,5))
-        ]
+
+    final zapatillaModel = Provider.of<ZapatillaModel>(context);
+
+    return GestureDetector(
+      onTap: (){
+        final zapatillaModel = Provider.of<ZapatillaModel>(context, listen: false);
+        zapatillaModel.talla = this.numero;
+      },
+      child: Container(
+        alignment: Alignment.center,
+        child: Text('${numero.toString().replaceAll('.0', '')}',
+          style: TextStyle(
+            color: (this.numero==zapatillaModel.talla)? Colors.white:Color(0xfff1a23a),
+            fontSize: 16,
+            fontWeight: FontWeight.bold,)),
+        width: 45, height: 45,
+        decoration: BoxDecoration(
+          color: (this.numero==zapatillaModel.talla)?Color(0xfff1a23a):Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            if(this.numero==zapatillaModel.talla)
+            BoxShadow(color: Color(0xfff1a23a),blurRadius: 10, offset: Offset(0,5))
+          ]
+        ),
       ),
     );
   }
