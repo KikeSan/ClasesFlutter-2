@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shoesapp/src/helpers/helpers.dart';
 import 'package:shoesapp/src/models/zapatilla_model.dart';
 import 'package:shoesapp/src/widgets/custom_widgets.dart';
 
@@ -8,6 +9,7 @@ class ZapatillaDescPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    cambiarStatusLight();
     return Scaffold(
       body: Column(
         children: [
