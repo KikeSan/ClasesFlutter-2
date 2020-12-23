@@ -65,7 +65,13 @@ class Lyrics extends StatelessWidget {
   }
 }
 
-class TituloPlay extends StatelessWidget {
+class TituloPlay extends StatefulWidget {
+  @override
+  _TituloPlayState createState() => _TituloPlayState();
+}
+
+class _TituloPlayState extends State<TituloPlay> {
+  bool isPlaying = false;
   @override
   Widget build(BuildContext context) {
     return Container(
