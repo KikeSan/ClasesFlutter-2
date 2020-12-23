@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoesapp/src/models/zapatilla_model.dart';
 import 'package:shoesapp/src/widgets/custom_widgets.dart';
 
 class ZapatillaDescPage extends StatelessWidget {
@@ -101,10 +103,10 @@ class _ColoresYMas extends StatelessWidget {
           Expanded(
             child: Stack(
               children: [
-                Positioned(left:90,child:_BotonColor(Color(0xffc6d642),3)),
-                Positioned(left:60,child:_BotonColor(Color(0xffffad29),2)),
-                Positioned(left:30,child:_BotonColor(Color(0xff2099f1),1)),
-                _BotonColor(Color(0xff364d56),0),
+                Positioned(left:90,child:_BotonColor(Color(0xffc6d642),3,'assets/imgs/verde.png')),
+                Positioned(left:60,child:_BotonColor(Color(0xffffad29),2,'assets/imgs/amarillo.png')),
+                Positioned(left:30,child:_BotonColor(Color(0xff2099f1),1,'assets/imgs/azul.png')),
+                _BotonColor(Color(0xff364d56),0,'assets/imgs/negro.png'),
               ],
             )),
           //Spacer(),
@@ -118,10 +120,12 @@ class _ColoresYMas extends StatelessWidget {
 class _BotonColor extends StatelessWidget {
   final Color color;
   final int index;
+  final String urlImagen;
 
   _BotonColor(
     this.color,
-    this.index
+    this.index,
+    this.urlImagen
   );
 
   @override
@@ -129,12 +133,18 @@ class _BotonColor extends StatelessWidget {
     return ElasticInLeft(
       delay: Duration(milliseconds: this.index*100),
       duration: Duration(milliseconds: 1300),
-      child: Container(
-        width: 45,
-        height: 45,
-        decoration: BoxDecoration(
-          color: this.color,
-          shape: BoxShape.circle
+      child: GestureDetector(
+        onTap: (){
+          final zapatillaModel = Provider.of<ZapatillaModel>(context, listen: false);
+          zapatillaModel.assetImage = this.urlImagen;
+        },
+        child: Container(
+          width: 45,
+          height: 45,
+          decoration: BoxDecoration(
+            color: this.color,
+            shape: BoxShape.circle
+          ),
         ),
       ),
     );
