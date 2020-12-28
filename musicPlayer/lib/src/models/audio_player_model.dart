@@ -42,6 +42,7 @@ class AudioPlayerModel with ChangeNotifier {
   }
 
   String printDuration(Duration duration){
+    print('Duration--->$duration');
     String twoDigits(int n){
       if(n>=10) return "$n";
       return "0$n";
